@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DataGrid Complex Toolbar - jQuery EasyUI Demo</title>
+	<link id="easyui" rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="themes/icon.css">
+	<!--  link rel="stylesheet" type="text/css" href="themes/demo.css">-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script>
+	function getObject(elementId) { //获取指定id的object
+		 if (document.getElementById) {
+		  return document.getElementById(elementId);
+		 } else if (document.all) {
+		  return document.all[elementId];
+		 } else if (document.layers) {
+		  return document.layers[elementId];
+		 }
+		}
+		function changeStyle(id){//切换样式
+		 var stylesheet=getObject("easyui").href="themes/"+id+"/easyui.css";
+		 document.cookie="stylesheet="+escape(stylesheet);//写入Cookie
+		 //alert(document.cookie);
+		 //alert(stylesheet);
+		}
+
+
+		function initStyle(){ //初始化样式，如果cookie存在样式，则加载cookie样式，否则加载默认样式
+		  if(/stylesheet=([^;]+)/.test(document.cookie))//判断是否存在cookie.
+		   getObject("color").href=unescape(RegExp.$1);
+		   //alert(/stylesheet=([^;]+)/.test(document.cookie));
+		}
+	</script>
+</head>
+<body>
+	<h2>DataGrid Complex Toolbar</h2>
+	<p>The DataGrid toolbar can be defined from a &lt;div/&gt; markup, so you can define the layout of toolbar easily.</p>
+	<a href="#" class="easyui-linkbutton" onclick="changeStyle('metro')" plain="true">样式1</a>
+	<a href="#" class="easyui-linkbutton" onclick="changeStyle('bootstrap')" plain="true">样式2</a>
+	<a href="#" class="easyui-linkbutton" onclick="changeStyle('black')" plain="true">样式3</a>
+	<div style="margin:20px 0;"></div>
+	<table class="easyui-datagrid" title="DataGrid Complex Toolbar" style="width:700px;height:250px"
+			data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:'#tb'">
+		<thead>
+			<tr>
+				<th data-options="field:'itemid',width:80">Item ID</th>
+				<th data-options="field:'productid',width:100">Product</th>
+				<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+				<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+				<th data-options="field:'attr1',width:240">Attribute</th>
+				<th data-options="field:'status',width:60,align:'center'">Status</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="tb" style="padding:5px;height:auto">
+		<div style="margin-bottom:5px">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"></a>
+		</div>
+		<div>
+			Date From: <input class="easyui-datebox" style="width:80px">
+			To: <input class="easyui-datebox" style="width:80px">
+			Language: 
+			<select class="easyui-combobox" panelHeight="auto" style="width:100px">
+				<option value="java">Java</option>
+				<option value="c">C</option>
+				<option value="basic">Basic</option>
+				<option value="perl">Perl</option>
+				<option value="python">Python</option>
+			</select>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+		</div>
+	</div>
+</body>
+</html>
